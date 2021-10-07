@@ -37,6 +37,7 @@ public class GestionaAgenda {
 	 * @throws FileNotFoundException
 	 */
 	public void abrir() throws FileNotFoundException {
+		fichero = new RandomAccessFile(nomFichero, "rw");
 	}
 	
 	/**
@@ -44,7 +45,9 @@ public class GestionaAgenda {
 	 * @throws IOException
 	 */
 	public void cerrar() throws IOException {
-		
+		if (fichero != null) {
+			fichero.close();
+		}
 	}
 	
 	/**
@@ -54,7 +57,12 @@ public class GestionaAgenda {
 	 * @throws IOException
 	 */
 	public void escribir (Persona registro, int pos) throws IOException {
-		
+		if (fichero != null) {
+			// posiciono el puntero en el sitio que quiero ...
+			fichero.seek(calculaposicion(pos));
+			this.escribir(registro);
+		}
+	}
 
 
 	/**
@@ -75,7 +83,18 @@ public class GestionaAgenda {
 				bufferN.append(registro.getNombre());
 			}
 			bufferN.setLength(dimensionNombre);
+			fichero.writeChars(bufferN.toString());
+
+			// escribir la EDAD
+			fichero.writeInt(registro.getEdad());
 			
+			// PARA ESCRIBIR EL EMAIL
+			StringBuffer bufferE= new StringBuffer();
+			if (registro.getEmail() != null) {
+				bufferE.append(registro.getEmail());
+			}
+			bufferE.setLength(dimensionEmail);
+			fichero.writeChars(bufferE.toString());
 		}
 		
 	}
@@ -104,7 +123,36 @@ public class GestionaAgenda {
 	 */
 	public Persona leer() {
 		
+		Persona registro = null;
 		
+		if (fichero != null) {
+			try {
+				registro = new Persona();
+				
+				// TENGO QUE IR LEYENDO EN ORDEN LO QUE HE ESCRITO ANTES
+				// leo el NOMBRE
+				char campoN[] = new char[dimensionNombre];
+				for (int i = 0; i < dimensionNombre; i++) {
+					campoN[i] = fichero.readChar();
+				}	
+				registro.setNombre(new String(campoN));
+				
+				registro.setEdad(fichero.readInt());		
+
+				// leo el EMAIL
+				char campoE[] = new char[dimensionEmail];
+				for (int i = 0; i < dimensionEmail; i++) {
+					campoE[i] = fichero.readChar();
+				}			
+				registro.setEmail(new String(campoE));
+
+			} catch (Exception e) {
+				// entrará aquí cuando haya llegado al final del fichero
+				registro = null;
+			}
+		}
+		
+		return registro;
 	}
 	
 	/**
@@ -115,7 +163,7 @@ public class GestionaAgenda {
 	 * @return la posición
 	 */
 	private int calculaposicion(int pos) {
-		
+		return (pos-1)* TAMAGNOREGISTRO;
 	}
 	
 	/**
@@ -124,7 +172,7 @@ public class GestionaAgenda {
 	 * @throws IOException
 	 */
 	public void iniciar() throws IOException  {			
-			
+			fichero.seek(0);	
 	}
 	
 	

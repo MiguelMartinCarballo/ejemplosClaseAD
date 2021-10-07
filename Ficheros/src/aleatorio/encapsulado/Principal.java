@@ -1,17 +1,13 @@
 package aleatorio.encapsulado;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Principal {
 
 	public static void main(String[] args) {
 			
-		GestionaAgenda agenda = new GestionaAgenda("AgendaPersonas.dat");
+		GestionaAgenda agenda = new GestionaAgenda("//src//aleatorio//encapsulado//AgendaPersonas.dat");
 		
 				
 		//  guarda las personas en el fichero secuencial
@@ -21,6 +17,15 @@ public class Principal {
 			agenda.abrir();
 			
 			// escribir las personas
+			Persona p1 = new Persona("Angela", 44, "angela@gmail.com");
+			Persona p2 = new Persona("Pedro", 22, "pedro@gmail.com");
+			Persona p3 = new Persona("Luis",33, "luis@gmail.com");
+			Persona p4 = new Persona("Ana", 24, "ana@gmail.com");
+			
+			agenda.escribir(p1,1);
+			agenda.escribir(p2,2);
+			agenda.escribir(p3,3);
+			agenda.escribir(p4,4);
 				
 			
 		} // COMPLETA CON LOS CATCH QUE HAGAN FALTA  
@@ -35,7 +40,7 @@ public class Principal {
 		// leer las personas
 		try {
 			
-			
+			System.out.println(agenda.leer(3));
 			
 			
 		} catch (Exception e) {

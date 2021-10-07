@@ -76,7 +76,7 @@ public class Persona {
 	 */
 	@Override
 	public String toString() {
-		return "Mascota [nombre=" + nombre + ", edad=" + edad + ", email=" + email + "]";
+		return "Persona [nombre=" + nombre + ", edad=" + edad + ", email=" + email + "]";
 	}
 
 
