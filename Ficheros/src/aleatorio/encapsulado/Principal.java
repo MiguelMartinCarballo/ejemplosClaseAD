@@ -7,7 +7,7 @@ public class Principal {
 
 	public static void main(String[] args) {
 			
-		GestionaAgenda agenda = new GestionaAgenda("//src//aleatorio//encapsulado//AgendaPersonas.dat");
+		GestionaAgenda agenda = new GestionaAgenda("src//aleatorio//encapsulado//AgendaPersonas.dat");
 		
 				
 		//  guarda las personas en el fichero secuencial
