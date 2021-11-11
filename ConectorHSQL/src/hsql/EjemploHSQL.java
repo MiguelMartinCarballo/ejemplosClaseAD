@@ -12,17 +12,16 @@ public class EjemploHSQL {
 			Class.forName("org.hsqldb.jdbc.JDBCDriver");
 					//+ "org.hsqldb.jdbcDriver");
         	
-        	// ESTABLECER LA CONEXIÓN con la base de datos
+        	// ESTABLECER LA CONEXIÓN con la base de datos que tiene usuario y contraseña
             Connection conexion = DriverManager.getConnection("jdbc:hsqldb:file:src\\datos\\biblioteca", "alumno", "alumno");
             // parametro 1 = Driver que utilizamos y ruta y nombre de la base de datos
-            //				jdbc:sqlite:C:\\Users\\Eva Royo\\Documents\\BBDD\\sqlite\\biblioteca.db
             // parametro 2 = nombre del usuario
             // parametro 3 = contraseña del usuario
             
             
             // PREPARAMOS LA SENTENCIA SQL
             Statement sentencia = (Statement) conexion.createStatement();
-            ResultSet resultado = sentencia.executeQuery("SELECT * FROM \"libro\"");
+            ResultSet resultado = sentencia.executeQuery("SELECT * FROM \"libro\""); // cuidado con las comillas que exige HSQLDB
             
             // recorro el resultado
             while (resultado.next()) {
