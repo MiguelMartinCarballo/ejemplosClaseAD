@@ -21,7 +21,7 @@ public class RecogeInformacionPorIdBDOO {
 			baseDatosOO = ODBFactory.open(ruta + nombreBD);
 			
 			// recuperar al equipo
-			OID elIDdelEquipo = OIDFactory.buildObjectOID(2);
+			OID elIDdelEquipo = OIDFactory.buildObjectOID(14);
 			Object elobjeto = (Object) baseDatosOO.getObjectFromId(elIDdelEquipo);
 
 			if (elobjeto.getClass().equals(Equipo.class)) {
@@ -30,6 +30,8 @@ public class RecogeInformacionPorIdBDOO {
 				System.out.println("El jugador se llama "+ ((Jugador)elobjeto).getNombre());
 			}	
 			
+		} catch (org.neodatis.odb.ODBRuntimeException e) {
+			System.out.println("No existe ese id");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

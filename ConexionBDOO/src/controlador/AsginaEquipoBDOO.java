@@ -29,7 +29,9 @@ public class AsginaEquipoBDOO {
 			
 			// asignar el jugador al equipo
 			for (Jugador jugador : losjugadores) {
-				elequipo.addJugador(jugador);
+				if (jugador.getDeporte().equals(elequipo.getDeporte())) { 
+					elequipo.addJugador(jugador);
+				}
 			}
 			
 			// guardar lo que he modificado
