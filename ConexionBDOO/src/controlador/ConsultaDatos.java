@@ -19,7 +19,7 @@ public class ConsultaDatos {
 			String ruta = "src\\basedatos\\";
 			baseDatosOO = ODBFactory.open(ruta + nombreBD);
 			
-			IQuery consulta = new CriteriaQuery(Jugador.class, Where.equal("deporte", "tenis"));
+			IQuery consulta = new CriteriaQuery(Jugador.class, Where.equal("deporte", "voleybol"));
 			consulta.orderByAsc("edad");
 			
 			//mostrar los resultados de la consulta
